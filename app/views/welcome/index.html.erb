@@ -1,1 +1,11 @@
 <h1>Welcome!</h1>
+считать длину светового дня?
+<br><br>
+
+<% JSON.parse(@data).as_json.each do |t| %>
+  <%= t %>
+<% end %>
+
+<br><br>
+
+<%= JSON.parse(@data)["sunset"] %>

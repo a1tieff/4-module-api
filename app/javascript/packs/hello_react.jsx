@@ -17,6 +17,30 @@ function callServer(id) {
     })
 }
 
+function showSunriseTime(e) {
+  // до этого в скобках было e
+  let data = {
+    //city: e.target.value,
+    latitude: e.target.value,
+    longitude: e.target.value
+  }
+
+  fetch('http://localhost:3000/api/sunrise_time/show_sunrise_time', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data)
+    })
+    .catch(error => {
+      console.error('Error:', error)
+    })
+}
+
 const Fx = props => {
   console.log(props)
 
@@ -25,6 +49,10 @@ const Fx = props => {
       <div onClick={() => callServer(props.id)}>{props.name}</div>
     </div>
   )
+}
+
+const Sunrise = props => {
+  return <div></div>
 }
 
 const Rack = props => {
@@ -36,7 +64,12 @@ const Rack = props => {
     return <Fx {...fx} key={i} />
   })
 
-  return <div>{fxElements}</div>
+  return (
+    <div>
+      <div>{fxElements}</div>
+      <input onChange={showSunriseTime} />
+    </div>
+  )
 }
 
 document.addEventListener('DOMContentLoaded', () => {
